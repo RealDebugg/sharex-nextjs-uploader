@@ -57,7 +57,8 @@ export default async function handler(
 
     const baseUrl = process.env.BASE_URL || "http://localhost:3000/img";
 
-    return res.status(200).json(`${baseUrl}/${filename}`);
+    res.setHeader("Content-Type", "text/plain");
+    return res.status(200).send(`${baseUrl}/${filename}`);
   } catch (error) {
     return res.status(500).json(String(error));
   }
