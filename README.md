@@ -33,7 +33,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 When deploying to Vercel, make sure to update the environment variables to match your settings.
 
 - `BLOB_READ_WRITE_TOKEN` should be the token to your private blob storage.
-- `BASE_URL` should be your domain + "/img". This is the URL where you can view your images online. For example: "img.debugg.co/img"
+- `BASE_URL` should be your domain + "/img". This is the URL where you can view your images online. For example: "https://img.debugg.co/img". **Including https in the beginning is important!!!!!**
 
 ## Setting up ShareX
 
@@ -48,3 +48,7 @@ When deploying to Vercel, make sure to update the environment variables to match
   - "Body" must be "Form data (multipart/form-data)"
   - Under the "Body" drop down, in the "Name" field, enter "api_key" & the "Value" should be the same as your `BLOB_READ_WRITE_TOKEN` in your Vercel environment.
   - "File form name" should be "fileupload"
+
+## Roadmap
+
+- [ ] Discord inline image preview
