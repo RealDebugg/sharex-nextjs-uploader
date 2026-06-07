@@ -9,15 +9,6 @@ export const config = {
   },
 };
 
-type ResponseData = {
-  success: boolean;
-  error?: string;
-  files?: {
-    name: string;
-    url: string;
-  }[];
-};
-
 const parseForm = (req: NextApiRequest) =>
   new Promise<{ fields: formidable.Fields; files: formidable.Files }>(
     (resolve, reject) => {
@@ -31,19 +22,17 @@ const parseForm = (req: NextApiRequest) =>
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>,
+  res: NextApiResponse<string>,
 ) {
   if (req.method !== "POST") {
-    return res
-      .status(405)
-      .json({ success: false, error: "Method Not Allowed" });
+    return res.status(405).json("Method Not Allowed");
   }
 
   try {
     const { fields, files } = await parseForm(req);
 
     if (fields.api_key![0] !== process.env.BLOB_READ_WRITE_TOKEN) {
-      return res.status(401).json({ success: false, error: "Unauthorized" });
+      return res.status(401).json("Unauthorized");
     }
 
     const fileField = files.fileupload;
@@ -52,16 +41,11 @@ export default async function handler(
       : (fileField as formidable.File | undefined);
 
     if (!file || !file.filepath) {
-      return res
-        .status(400)
-        .json({ success: false, error: "The Fileupload field is required." });
+      return res.status(400).json("The Fileupload field is required.");
     }
 
     if (file.mimetype !== "image/png") {
-      return res.status(400).json({
-        success: false,
-        error: "A validation error occurred.",
-      });
+      return res.status(400).json("A validation error occurred.");
     }
 
     const filename = file.newFilename;
@@ -73,16 +57,8 @@ export default async function handler(
 
     const baseUrl = process.env.BASE_URL || "http://localhost:3000/img";
 
-    return res.status(200).json({
-      success: true,
-      files: [
-        {
-          name: filename,
-          url: `${baseUrl}/${filename}`,
-        },
-      ],
-    });
+    return res.status(200).json(`${baseUrl}/${filename}`);
   } catch (error) {
-    return res.status(500).json({ success: false, error: String(error) });
+    return res.status(500).json(String(error));
   }
 }
