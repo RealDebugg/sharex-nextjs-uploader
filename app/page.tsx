@@ -16,7 +16,7 @@ export default function Home() {
           </p>
           <a
             className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRealDebugg%2Fsharex-nextjs-uploader&env=BLOB_READ_WRITE_TOKEN,BASE_URL&envDefaults=%7B%22BLOB_READ_WRITE_TOKEN%22%3A%22************%22%2C%22BASE_URL%22%3A%22http%3A%2F%2Flocalhost%3A3000%2Fimg%22%7D&envDescription=Setting%20up%20blob%20storage%20and%20getting%20a%20token%20is%20linked%20below.%20The%20base%20URL%20should%20be%20your%20domain%20%2B%20%22%2Fimg%22&envLink=https%3A%2F%2Fvercel.com%2Fdocs%2Fvercel-blob%2Fserver-upload"
+            href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRealDebugg%2Fsharex-nextjs-uploader&env=BLOB_READ_WRITE_TOKEN,BASE_URL,DISABLE_CDN_REDIRECT&envDefaults=%7B%22BLOB_READ_WRITE_TOKEN%22%3A%22************%22%2C%22BASE_URL%22%3A%22http%3A%2F%2Flocalhost%3A3000%22%2C%22DISABLE_CDN_REDIRECT%22%3A%22false%22%7D&envDescription=Setting%20up%20blob%20storage%20and%20getting%20a%20token%20is%20linked%20below.%20The%20base%20URL%20should%20be%20your%20domain%20such%20as%20%22img.debugg.co%22.&envLink=https%3A%2F%2Fvercel.com%2Fdocs%2Fvercel-blob%2Fserver-upload"
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -18,14 +18,18 @@ export default async function handler(
   const url = req.url;
   const imgSlug = url?.split("/").pop();
 
-  console.log("REQUEST HEADERS:", req);
-
-  if (req.headers["sec-fetch-user"] !== undefined) {
-    res.setHeader(
-      "Location",
-      `${baseUrl}/img/${encodeURIComponent(imgSlug as string)}`,
-    );
-    return res.status(302).end();
+  if (process.env.DISABLE_CDN_REDIRECT === "false") {
+    if (
+      req.headers["sec-fetch-mode"] === "navigate" &&
+      req.headers["sec-fetch-dest"] === "document"
+    ) {
+      //TODO: This solution seems unstable, redirects aren't handled properly or we aren't entering this block at all
+      res.setHeader(
+        "Location",
+        `${baseUrl}/img/${encodeURIComponent(imgSlug as string)}`,
+      );
+      return res.status(302).end();
+    }
   }
 
   if (!imgSlug) {
