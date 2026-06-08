@@ -13,13 +13,29 @@ export default async function handler(
     return res.status(405).json({ error: "Method Not Allowed" });
   }
 
-  if (!req.query || typeof req.query.img !== "string") {
+  const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+
+  const url = req.url;
+  const imgSlug = url?.split("/").pop();
+
+  if (
+    req.headers.accept?.includes("text/html") === true &&
+    req.headers.origin !== baseUrl
+  ) {
+    res.setHeader(
+      "Location",
+      `${baseUrl}/img/${encodeURIComponent(imgSlug as string)}`,
+    );
+    return res.status(302).end();
+  }
+
+  if (!imgSlug) {
     return res
       .status(400)
       .json({ error: "The Img query parameter is required." });
   }
 
-  const pathname = `${encodeURIComponent(req.query.img)}.png`;
+  const pathname = `${encodeURIComponent(imgSlug)}.png`;
   const result = await get(pathname, {
     access: "private",
     useCache: true,

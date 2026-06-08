@@ -55,10 +55,10 @@ export default async function handler(
       access: "private",
     });
 
-    const baseUrl = process.env.BASE_URL || "http://localhost:3000/img";
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
 
     res.setHeader("Content-Type", "text/plain");
-    return res.status(200).send(`${baseUrl}/${filename}`);
+    return res.status(200).send(`${baseUrl}/api/preview/${filename}`);
   } catch (error) {
     return res.status(500).json(String(error));
   }

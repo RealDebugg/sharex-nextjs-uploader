@@ -16,7 +16,7 @@ export default function Page() {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <img src={`/api/fetch?img=${encodeURIComponent(slug)}`} alt={slug} />
+      <img src={`/api/preview/${encodeURIComponent(slug)}`} alt={slug} />
     </div>
   );
 }
