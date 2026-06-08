@@ -18,7 +18,7 @@ export default async function handler(
   const url = req.url;
   const imgSlug = url?.split("/").pop();
 
-  console.log("REQUEST HEADERS:", req);
+  /* console.log("REQUEST HEADERS:", req);
 
   if (
     req.headers.accept?.includes("text/html") === true &&
@@ -29,7 +29,7 @@ export default async function handler(
       `${baseUrl}/img/${encodeURIComponent(imgSlug as string)}`,
     );
     return res.status(302).end();
-  }
+  } */
 
   if (!imgSlug) {
     return res
