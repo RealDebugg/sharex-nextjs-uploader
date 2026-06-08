@@ -18,6 +18,8 @@ export default async function handler(
   const url = req.url;
   const imgSlug = url?.split("/").pop();
 
+  console.log("REQUEST HEADERS:", req.headers.origin, req.headers.accept);
+
   if (
     req.headers.accept?.includes("text/html") === true &&
     req.headers.origin !== baseUrl
